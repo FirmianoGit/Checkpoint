@@ -1,4 +1,8 @@
 import { DataSource } from 'typeorm';
+import { Empresa } from './entities/Empresa';
+import { Departamento } from './entities/Departamento';
+import { Endereco } from './entities/Endereco';
+import { Registro } from './entities/Registro';
 
 export const databaseProviders = [
   {
@@ -11,7 +15,13 @@ export const databaseProviders = [
         username: 'root',
         password: 'root',
         database: 'checkpoint',
-        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+        entities: [
+          __dirname + '/../**/*.entity{.ts,.js}',
+          Empresa,
+          Departamento,
+          Endereco,
+          Registro,
+        ],
         synchronize: true,
       });
 

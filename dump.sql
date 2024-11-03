@@ -56,7 +56,8 @@ CREATE TABLE `empresa` (
   `senha` varchar(150) NOT NULL,
   `tipo_empresa_id` int NOT NULL,
   `endereco_empresa_id` int DEFAULT NULL,
-  `local_registro` point NOT NULL,
+  `longitude` decimal(10,8) DEFAULT NULL,
+  `latitude` decimal(10,8) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_empresa_tipo_empresa` (`tipo_empresa_id`),
   CONSTRAINT `fk_empresa_tipo_empresa` FOREIGN KEY (`tipo_empresa_id`) REFERENCES `tipo_empresa` (`id`)
@@ -134,29 +135,6 @@ LOCK TABLES `registro` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tipo_empresa`
---
-
-DROP TABLE IF EXISTS `tipo_empresa`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tipo_empresa` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `descricao` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tipo_empresa`
---
-
-LOCK TABLES `tipo_empresa` WRITE;
-/*!40000 ALTER TABLE `tipo_empresa` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tipo_empresa` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `usuario`
 --
 
@@ -197,4 +175,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-10  4:58:43
+-- Dump completed on 2024-11-02 13:52:07

@@ -1,6 +1,6 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Index('fk_empresa_tipo_empresa', ['tipoEmpresaId'], {})
+// '@Index('fk_empresa_tipo_empresa', ['tipoEmpresaId'], {})'
 @Entity('empresa', { schema: 'checkpoint' })
 export class Empresa {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
@@ -24,8 +24,11 @@ export class Empresa {
   @Column('int', { name: 'endereco_empresa_id', nullable: true })
   enderecoEmpresaId: number | null;
 
-  @Column('point', { name: 'local_registro' })
-  localRegistro: string;
+  @Column('decimal', { name: 'latitude', precision: 9, scale: 6 })
+  latitude: number;
+
+  @Column('decimal', { name: 'longitude', precision: 9, scale: 6 })
+  longitude: number;
 
   // @OneToMany(() => Departamento, (departamento) => departamento.empresa)
   // departamentos: Departamento[];

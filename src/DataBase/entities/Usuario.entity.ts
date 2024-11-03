@@ -27,8 +27,8 @@ export class Usuario {
   @Column('varchar', { name: 'tipo_usu', length: 20 })
   tipoUsu: string;
 
-  // @Column('int', { name: 'departamento_id' })
-  // departamentoId: number;
+  @Column('int', { name: 'departamento_id' })
+  departamentoId: number;
 
   // @OneToMany(() => Endereco, (endereco) => endereco.usuario)
   // enderecos: Endereco[];
