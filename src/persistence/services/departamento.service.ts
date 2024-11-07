@@ -5,8 +5,8 @@ import {
   NotAcceptableException,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateDepartamentoDto } from 'src/common/dto/Departamento/create-departamento.dto';
-import { UpdateDepartamentoDto } from 'src/common/dto/Departamento/update-departamento.dto';
+import { CreateDepartamentoDto } from 'src/persistence/common/dto/Departamento/create-departamento.dto';
+import { UpdateDepartamentoDto } from 'src/persistence/common/dto/Departamento/update-departamento.dto';
 import { Repository } from 'typeorm';
 import { Departamento } from 'src/DataBase/entities/Departamento';
 
