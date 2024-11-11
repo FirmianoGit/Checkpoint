@@ -20,8 +20,6 @@
 --
 
 DROP TABLE IF EXISTS `departamento`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `departamento` (
   `id` int NOT NULL AUTO_INCREMENT,
   `empresa_id` int NOT NULL,
@@ -46,21 +44,16 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `empresa`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `empresa` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nome_fantasia` varchar(50) NOT NULL,
   `razao_social` varchar(50) NOT NULL,
   `CNPJ` varchar(15) NOT NULL,
   `senha` varchar(150) NOT NULL,
-  `tipo_empresa_id` int NOT NULL,
   `endereco_empresa_id` int DEFAULT NULL,
   `longitude` decimal(10,8) DEFAULT NULL,
   `latitude` decimal(10,8) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_empresa_tipo_empresa` (`tipo_empresa_id`),
-  CONSTRAINT `fk_empresa_tipo_empresa` FOREIGN KEY (`tipo_empresa_id`) REFERENCES `tipo_empresa` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -78,8 +71,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `endereco`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `endereco` (
   `id` int NOT NULL AUTO_INCREMENT,
   `empresa_id` int DEFAULT NULL,
@@ -93,10 +84,10 @@ CREATE TABLE `endereco` (
   `cep` varchar(8) NOT NULL,
   `pais` varchar(100) NOT NULL DEFAULT 'Brasil',
   PRIMARY KEY (`id`),
-  KEY `fk_endereco_empresa` (`empresa_id`),
-  KEY `fk_endereco_usuario` (`usuario_id`),
-  CONSTRAINT `fk_endereco_empresa` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`),
-  CONSTRAINT `fk_endereco_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`)
+  KEY `fk_endereco_empresa_unique` (`empresa_id`),  -- Nome atualizado para evitar duplicação
+  KEY `fk_endereco_usuario_unique` (`usuario_id`),  -- Nome atualizado para evitar duplicação
+  CONSTRAINT `fk_endereco_empresa_unique` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`),
+  CONSTRAINT `fk_endereco_usuario_unique` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -114,14 +105,11 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `registro`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `registro` (
   `id_usuario` int NOT NULL,
   `Data_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_usuario`,`Data_registro`),
-  CONSTRAINT `fk_registro_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),
-  CONSTRAINT `registro_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
+  CONSTRAINT `fk_registro_usuario_unique` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)  -- Nome atualizado para evitar duplicação
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -139,8 +127,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `usuario`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuario` (
   `id` int NOT NULL AUTO_INCREMENT,
   `cpf` varchar(11) NOT NULL,
@@ -152,9 +138,10 @@ CREATE TABLE `usuario` (
   `tipo_usu` varchar(20) NOT NULL,
   `departamento_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_usuario_departamento` (`departamento_id`),
-  CONSTRAINT `fk_usuario_departamento` FOREIGN KEY (`departamento_id`) REFERENCES `departamento` (`id`)
+  KEY `fk_usuario_departamento_unique` (`departamento_id`),  -- Nome atualizado para evitar duplicação
+  CONSTRAINT `fk_usuario_departamento_unique` FOREIGN KEY (`departamento_id`) REFERENCES `departamento` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-02 13:52:07
+-- Dump completed on 2024-11-10 23:56:13

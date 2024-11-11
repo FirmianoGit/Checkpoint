@@ -1,4 +1,13 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Empresa } from './Empresa.entity';
+import { Usuario } from './Usuario.entity';
 
 @Index('fk_endereco_empresa', ['empresaId'], {})
 @Index('fk_endereco_usuario', ['usuarioId'], {})
@@ -37,17 +46,17 @@ export class Endereco {
   @Column('varchar', { name: 'pais', length: 100, default: () => "'Brasil'" })
   pais: string;
 
-  // @ManyToOne(() => Empresa, (empresa) => empresa.enderecos, {
-  //   onDelete: 'NO ACTION',
-  //   onUpdate: 'NO ACTION',
-  // })
-  // @JoinColumn([{ name: 'empresa_id', referencedColumnName: 'id' }])
-  // empresa: Empresa;
+  @ManyToOne(() => Empresa, (empresa) => empresa.enderecos, {
+    onDelete: 'NO ACTION',
+    onUpdate: 'NO ACTION',
+  })
+  @JoinColumn([{ name: 'empresa_id', referencedColumnName: 'id' }])
+  empresa: Empresa;
 
-  // @ManyToOne(() => Usuario, (usuario) => usuario.enderecos, {
-  //   onDelete: 'NO ACTION',
-  //   onUpdate: 'NO ACTION',
-  // })
-  // @JoinColumn([{ name: 'usuario_id', referencedColumnName: 'id' }])
-  // usuario: Usuario;
+  @ManyToOne(() => Usuario, (usuario) => usuario.enderecos, {
+    onDelete: 'NO ACTION',
+    onUpdate: 'NO ACTION',
+  })
+  @JoinColumn([{ name: 'usuario_id', referencedColumnName: 'id' }])
+  usuario: Usuario;
 }

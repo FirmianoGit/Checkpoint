@@ -1,6 +1,17 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Endereco } from './Endereco.entity';
+import { Registro } from './Registro.entity';
+import { Departamento } from './Departamento.entity';
 
-// @Index('fk_usuario_departamento', ['departamentoId'], {})
+@Index('fk_usuario_departamento', ['departamentoId'], {})
 @Entity('usuario', { schema: 'checkpoint' })
 export class Usuario {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
@@ -25,24 +36,24 @@ export class Usuario {
   telefone: string;
 
   @Column('varchar', { name: 'tipo_usu', length: 20 })
-  tipoUsu: string;
+  tipoUsuario: string;
 
   @Column('int', { name: 'departamento_id' })
   departamentoId: number;
 
-  // @OneToMany(() => Endereco, (endereco) => endereco.usuario)
-  // enderecos: Endereco[];
+  @OneToMany(() => Endereco, (endereco) => endereco.usuario)
+  enderecos: Endereco[];
 
-  // @OneToMany(() => Registro, (registro) => registro.idUsuario2)
-  // registros: Registro[];
+  @OneToMany(() => Registro, (registro) => registro.idUsuario2)
+  registros: Registro[];
 
-  // @OneToMany(() => Registro, (registro) => registro.idUsuario3)
-  // registros2: Registro[];
+  @OneToMany(() => Registro, (registro) => registro.idUsuario3)
+  registros2: Registro[];
 
-  // @ManyToOne(() => Departamento, (departamento) => departamento.usuarios, {
-  //   onDelete: 'NO ACTION',
-  //   onUpdate: 'NO ACTION',
-  // })
-  // @JoinColumn([{ name: 'departamento_id', referencedColumnName: 'id' }])
-  // departamento: Departamento;
+  @ManyToOne(() => Departamento, (departamento) => departamento.usuarios, {
+    onDelete: 'NO ACTION',
+    onUpdate: 'NO ACTION',
+  })
+  @JoinColumn([{ name: 'departamento_id', referencedColumnName: 'id' }])
+  departamento: Departamento;
 }
