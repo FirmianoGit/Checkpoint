@@ -19,11 +19,4 @@ export class Registro {
   })
   @JoinColumn([{ name: 'id_usuario', referencedColumnName: 'id' }])
   idUsuario2: Usuario;
-
-  @ManyToOne(() => Usuario, (usuario) => usuario.registros2, {
-    onDelete: 'NO ACTION',
-    onUpdate: 'NO ACTION',
-  })
-  @JoinColumn([{ name: 'id_usuario', referencedColumnName: 'id' }])
-  idUsuario3: Usuario;
 }
