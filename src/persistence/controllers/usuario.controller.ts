@@ -6,6 +6,8 @@ import {
   Param,
   Post,
   Put,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CreateUsuarioDto } from '../common/dto/usuario/create-usuario.dto';
 import { UpdateUsuarioDto } from '../common/dto/usuario/update-usuario.dto';
@@ -16,6 +18,7 @@ export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
 
   @Post()
+  @UsePipes(new ValidationPipe({ transform: true, forbidNonWhitelisted: true }))
   create(@Body() createUsuarioDto: CreateUsuarioDto) {
     return this.usuarioService.create(createUsuarioDto);
   }

@@ -21,17 +21,13 @@ export class CreateEmpresaDto {
 
   @IsNotEmpty()
   @IsNumber()
-  tipoEmpresaId: number;
-
-  @IsNotEmpty()
-  @IsNumber()
   enderecoEmpresaId: number;
 
   @IsNotEmpty()
   @IsNumber()
-  latitude: number;
+  latitude: string | null;
 
   @IsNotEmpty()
   @IsNumber()
-  longitude: number;
+  longitude: string | null;
 }

@@ -8,7 +8,7 @@ import {
 import { CreateEnderecoDto } from '../common/dto/endereco/create-endereco.dto';
 import { UpdateEnderecoDto } from '../common/dto/endereco/update-endereco.dto';
 import { Repository } from 'typeorm';
-import { Endereco } from 'src/DataBase/entities/Endereco';
+import { Endereco } from 'src/DataBase/entities/Endereco.entity';
 
 @Injectable()
 export class EnderecoService {

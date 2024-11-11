@@ -8,7 +8,7 @@ import {
 import { CreateDepartamentoDto } from 'src/persistence/common/dto/Departamento/create-departamento.dto';
 import { UpdateDepartamentoDto } from 'src/persistence/common/dto/Departamento/update-departamento.dto';
 import { Repository } from 'typeorm';
-import { Departamento } from 'src/DataBase/entities/Departamento';
+import { Departamento } from 'src/DataBase/entities/Departamento.entity';
 
 @Injectable()
 export class DepartamentoService {

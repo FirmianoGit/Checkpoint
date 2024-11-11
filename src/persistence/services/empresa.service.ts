@@ -5,7 +5,7 @@ import {
   NotAcceptableException,
   NotFoundException,
 } from '@nestjs/common';
-import { Empresa } from 'src/DataBase/entities/Empresa';
+import { Empresa } from 'src/DataBase/entities/Empresa.entity';
 import { Repository } from 'typeorm';
 import { CreateEmpresaDto } from '../common/dto/empresa/create-empresa.dto';
 import { UpdateEmpresaDto } from '../common/dto/empresa/update-empresa.dto';

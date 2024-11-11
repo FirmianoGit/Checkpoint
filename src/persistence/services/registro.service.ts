@@ -8,7 +8,7 @@ import {
 import { CreateRegistroDto } from '../common/dto/registro/create-registro.dto';
 import { UpdateRegistroDto } from '../common/dto/registro/update-registro.dto';
 import { Repository } from 'typeorm';
-import { Registro } from 'src/DataBase/entities/Registro';
+import { Registro } from 'src/DataBase/entities/Registro.entity';
 
 @Injectable()
 export class RegistroService {

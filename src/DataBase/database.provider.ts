@@ -1,8 +1,8 @@
 import { DataSource } from 'typeorm';
-import { Empresa } from './entities/Empresa';
-import { Departamento } from './entities/Departamento';
-import { Endereco } from './entities/Endereco';
-import { Registro } from './entities/Registro';
+import { Empresa } from './entities/Empresa.entity';
+import { Departamento } from './entities/Departamento.entity';
+import { Endereco } from './entities/Endereco.entity';
+import { Registro } from './entities/Registro.entity';
 
 export const databaseProviders = [
   {

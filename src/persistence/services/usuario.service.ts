@@ -55,6 +55,12 @@ export class UsuarioService {
         throw new Error('Nenhum usuário encontrado');
       }
 
+      usuarios.forEach((usuario) => {
+        usuario.senha = undefined;
+        usuario.cpf = undefined;
+        usuario.rg = undefined;
+      });
+
       return usuarios;
     } catch (error) {
       // Lança uma exceção personalizada em caso de erro
@@ -74,7 +80,12 @@ export class UsuarioService {
         throw new NotFoundException(`Usuário com o ID ${id} não encontrado`);
       }
 
-      return usuarioEncontrado;
+      return {
+        ...usuarioEncontrado,
+        senha: undefined,
+        cpf: undefined,
+        rg: undefined,
+      };
     } catch (error) {
       if (error instanceof NotFoundException) {
         // Relança a exceção de usuário não encontrado
