@@ -1,17 +1,15 @@
 import {
   Column,
   Entity,
-  Index,
   JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Departamento } from './Departamento.entity';
 import { Endereco } from './Endereco.entity';
 import { Registro } from './Registro.entity';
-import { Departamento } from './Departamento.entity';
 
-@Index('fk_usuario_departamento', ['departamentoId'], {})
 @Entity('usuario', { schema: 'checkpoint' })
 export class Usuario {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
@@ -46,9 +44,6 @@ export class Usuario {
 
   @OneToMany(() => Registro, (registro) => registro.idUsuario2)
   registros: Registro[];
-
-  @OneToMany(() => Registro, (registro) => registro.idUsuario3)
-  registros2: Registro[];
 
   @ManyToOne(() => Departamento, (departamento) => departamento.usuarios, {
     onDelete: 'NO ACTION',

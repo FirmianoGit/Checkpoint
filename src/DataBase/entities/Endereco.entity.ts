@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  Index,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -9,8 +8,6 @@ import {
 import { Empresa } from './Empresa.entity';
 import { Usuario } from './Usuario.entity';
 
-@Index('fk_endereco_empresa', ['empresaId'], {})
-@Index('fk_endereco_usuario', ['usuarioId'], {})
 @Entity('endereco', { schema: 'checkpoint' })
 export class Endereco {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
