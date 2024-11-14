@@ -22,7 +22,6 @@ export const databaseProviders = [
           Endereco,
           Registro,
         ],
-        synchronize: true,
       });
 
       return dataSource.initialize();

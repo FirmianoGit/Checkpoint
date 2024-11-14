@@ -8,9 +8,11 @@ import { EmpresaModule } from 'src/persistence/modules/empresa.module';
 import { DepartamentoModule } from 'src/persistence/modules/departamento.module';
 import { EnderecoModule } from 'src/persistence/modules/endereco.module';
 import { RegistroModule } from 'src/persistence/modules/registro.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     DatabaseModule,
     UsuarioModule,
     EmpresaModule,
