@@ -5,11 +5,9 @@ export class CreateRegistroDto {
   @IsNotEmpty()
   idUsuario: number;
 
-  @IsNotEmpty()
   @IsNumber()
   latitude: string;
 
-  @IsNotEmpty()
   @IsNumber()
   longitude: string;
 }
