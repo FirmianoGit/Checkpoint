@@ -2,13 +2,12 @@ import {
   Inject,
   Injectable,
   InternalServerErrorException,
-  NotAcceptableException,
   NotFoundException,
 } from '@nestjs/common';
+import { Registro } from 'src/DataBase/entities/Registro.entity';
+import { Repository } from 'typeorm';
 import { CreateRegistroDto } from '../common/dto/registro/create-registro.dto';
 import { UpdateRegistroDto } from '../common/dto/registro/update-registro.dto';
-import { Repository } from 'typeorm';
-import { Registro } from 'src/DataBase/entities/Registro.entity';
 
 @Injectable()
 export class RegistroService {
@@ -19,26 +18,16 @@ export class RegistroService {
 
   async create(createRegistroDto: CreateRegistroDto) {
     try {
-      // Cria uma nova instância de Registro com os dados do DTO
-      const novoRegistro: Registro =
-        this.registroRepository.create(createRegistroDto);
+      const novoRegistro: Registro = this.registroRepository.create({
+        idUsuario: createRegistroDto.idUsuario,
+        dataRegistro: new Date(Date.now()), // Adiciona um timestamp único
+      });
 
-      // Salva o novo registro no banco de dados
       await this.registroRepository.save(novoRegistro);
 
-      // Retorna o registro criado
       return novoRegistro;
     } catch (error) {
       console.error('Erro ao criar o registro:', error);
-
-      // Tratamento específico para erro de duplicação
-      if (error.code === '23505') {
-        throw new NotAcceptableException(
-          'O registro não pode ser adicionado. Verifique se as informações estão corretas ou se já existe um registro similar.',
-        );
-      }
-
-      // Lança uma exceção genérica para outros erros
       throw new InternalServerErrorException(
         'Ocorreu um erro ao tentar criar o registro. Tente novamente mais tarde.',
       );

@@ -33,7 +33,7 @@ export class Usuario {
   @Column('varchar', { name: 'telefone', length: 20 })
   telefone: string;
 
-  @Column('varchar', { name: 'tipo_usu', length: 20 })
+  @Column('varchar', { name: 'tipo_usu', length: 20, nullable: true })
   tipoUsuario: string;
 
   @Column('int', { name: 'departamento_id' })
@@ -42,7 +42,7 @@ export class Usuario {
   @OneToMany(() => Endereco, (endereco) => endereco.usuario)
   enderecos: Endereco[];
 
-  @OneToMany(() => Registro, (registro) => registro.idUsuario2)
+  @OneToMany(() => Registro, (registro) => registro.idUsuario)
   registros: Registro[];
 
   @ManyToOne(() => Departamento, (departamento) => departamento.usuarios, {

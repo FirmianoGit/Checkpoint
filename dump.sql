@@ -105,12 +105,15 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `registro`;
+
 CREATE TABLE `registro` (
+  `id` int NOT NULL AUTO_INCREMENT,  -- Coluna de ID auto-incrementável
   `id_usuario` int NOT NULL,
-  `Data_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_usuario`,`Data_registro`),
-  CONSTRAINT `fk_registro_usuario_unique` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)  -- Nome atualizado para evitar duplicação
+  `Data_registro` timestamp DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),  -- Definindo `id` como a chave primária
+  CONSTRAINT `fk_registro_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)  -- Ajustando o nome da constraint
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +138,7 @@ CREATE TABLE `usuario` (
   `email` varchar(40) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `telefone` varchar(20) NOT NULL,
-  `tipo_usu` varchar(20) NOT NULL,
+  `tipo_usu` varchar(20),
   `departamento_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_usuario_departamento_unique` (`departamento_id`),  -- Nome atualizado para evitar duplicação
