@@ -169,6 +169,7 @@ export class UsuarioService {
     }
   }
 
+  //lista por email
   async ListarUsuarioPorLogin(chave: string): Promise<Usuario> {
     return this.usuarioRepository.findOne({ where: { email: chave } });
   }
