@@ -12,6 +12,7 @@ import {
 import { CreateUsuarioDto } from '../common/dto/usuario/create-usuario.dto';
 import { UpdateUsuarioDto } from '../common/dto/usuario/update-usuario.dto';
 import { UsuarioService } from '../services/usuario.service';
+import { AcessarNumeroDTO } from '../common/dto/usuario/acessarNumero.dto';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -41,5 +42,10 @@ export class UsuarioController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usuarioService.remove(+id);
+  }
+
+  @Post('telefone')
+  async acessarNumeroDeTelefone(@Body() acessarNumeroDTO: AcessarNumeroDTO) {
+    return this.usuarioService.acessarNumeroDeTelefone(acessarNumeroDTO.email);
   }
 }

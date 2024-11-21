@@ -1,14 +1,22 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Usuario } from './Usuario.entity';
 
 @Entity('registro', { schema: 'checkpoint' })
 export class Registro {
-  @Column('int', { primary: true, name: 'id_usuario' })
+  @PrimaryGeneratedColumn('increment')
+  id: number; // Novo campo de ID auto-incrementável
+
+  @Column('int', { name: 'id_usuario' })
   idUsuario: number;
 
   @Column('timestamp', {
-    primary: true,
-    name: 'Data_registro',
+    name: 'data_registro',
     default: () => 'CURRENT_TIMESTAMP',
   })
   dataRegistro: Date;
@@ -18,5 +26,5 @@ export class Registro {
     onUpdate: 'NO ACTION',
   })
   @JoinColumn([{ name: 'id_usuario', referencedColumnName: 'id' }])
-  idUsuario2: Usuario;
+  usuario: Usuario; // Relacionamento com o campo Usuario
 }
