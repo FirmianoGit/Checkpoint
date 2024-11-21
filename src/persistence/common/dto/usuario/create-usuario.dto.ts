@@ -1,4 +1,4 @@
-import { IsInt, IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateUsuarioDto {
   @IsNotEmpty()
@@ -30,6 +30,6 @@ export class CreateUsuarioDto {
   tipoUsuario: string;
 
   @IsNotEmpty()
-  @IsInt()
-  departamentoId: number;
+  @IsString()
+  departamentoNome: string;
 }

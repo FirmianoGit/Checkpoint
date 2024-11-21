@@ -11,6 +11,7 @@ import { UpdateUsuarioDto } from '../common/dto/usuario/update-usuario.dto';
 import { Repository } from 'typeorm';
 import { Usuario } from 'src/DataBase/entities/Usuario.entity';
 import * as bcrypt from 'bcrypt';
+import { Departamento } from 'src/DataBase/entities/Departamento.entity';
 
 @Injectable()
 export class UsuarioService {
@@ -18,11 +19,19 @@ export class UsuarioService {
   constructor(
     @Inject('USUARIO_REPOSITORY')
     private readonly usuarioRepository: Repository<Usuario>,
+    @Inject('DEPARTAMENTO_REPOSITORY')
+    private readonly departamentoRepository: Repository<Departamento>,
   ) {}
 
   // Método para criar um novo usuário
   async create(createUsuarioDto: CreateUsuarioDto) {
     try {
+      const nomeDepartamento = createUsuarioDto.departamentoNome;
+      const novoDepartamento: Departamento =
+        await this.departamentoRepository.findOne({
+          where: { nome: nomeDepartamento },
+        });
+
       // Cria uma nova instância de usuário com dados do DTO e senha criptografada
       const novoUsuario: Usuario = this.usuarioRepository.create({
         ...createUsuarioDto,
@@ -30,7 +39,10 @@ export class UsuarioService {
       });
 
       // Salva o novo usuário no banco de dados
-      this.usuarioRepository.save(novoUsuario);
+      this.usuarioRepository.save({
+        ...novoUsuario,
+        departamentoId: novoDepartamento.id,
+      });
 
       // Retorna o usuário criado, mas oculta o campo senha
       return {
