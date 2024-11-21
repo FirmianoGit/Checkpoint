@@ -173,4 +173,13 @@ export class UsuarioService {
   async ListarUsuarioPorLogin(chave: string): Promise<Usuario> {
     return this.usuarioRepository.findOne({ where: { email: chave } });
   }
+
+  async acessarNumeroDeTelefone(chave: string): Promise<string> {
+    const usuario = await this.ListarUsuarioPorLogin(chave);
+    if (usuario) {
+      return usuario.telefone;
+    } else {
+      return 'Usuário não encontrado';
+    }
+  }
 }
